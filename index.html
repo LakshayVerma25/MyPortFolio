@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakshay Verma - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #3498db;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        #hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #ff6b6b;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        section {
+            width: 100%;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        /* Backgrounds */
+        #about,
+        #education {
+            background: #f8f9fa;
+        }
+
+        #projects,
+        #certifications {
+            background: white;
+        }
+
+        /* Skills Grid */
+        .skills-title {
+            text-align: center;
+            font-size: 2rem;
+            margin: 2rem 0;
+            color: #2c3e50;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .skill-category h4 {
+            color: #3498db;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            padding: 0.5rem 1rem;
+            background: #21638e;
+            color: white;
+            border-radius: 25px;
+            font-size: 0.9rem;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-image {
+            height: 180px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-content h3 {
+            margin-bottom: 0.3rem;
+            color: #2c3e50;
+        }
+
+        .project-date {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+        }
+
+        .project-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.2rem;
+            color: #555;
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tag {
+            padding: 0.3rem 0.8rem;
+            background: #ecf0f1;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+
+        /* Education */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: #3498db;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            padding: 20px 0 20px 60px;
+            position: relative;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            border: 4px solid white;
+            border-radius: 50%;
+            left: 10px;
+            top: 25px;
+            z-index: 1;
+            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.2);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .timeline-content h3 {
+            color: #2c3e50;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-content h4 {
+            color: #3498db;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-date {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+            background: #ecf0f1;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+        }
+
+        .timeline-content p,
+        .timeline-content ul {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .timeline-content ul {
+            padding-left: 1.2rem;
+        }
+
+        /* Certifications */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #3498db;
+        }
+
+        .cert-icon {
+            font-size: 2.5rem;
+            color: #3498db;
+        }
+
+        .cert-info h3 {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 0.3rem;
+        }
+
+        .cert-info p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .cert-date {
+            font-size: 0.8rem;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        #contact .section-title {
+            color: white;
+        }
+
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .contact-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(10px);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            color: #333;
+        }
+
+        .contact-form h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: 0.3s;
+            background: #f8f9fa;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            background: white;
+        }
+
+        .contact-form button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .contact-form button:hover {
+            background: #fa5252;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .contact-wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                left: 0;
+                top: 100%;
+                flex-direction: column;
+                background-color: rgba(255, 255, 255, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 0;
+                max-height: 0;
+                overflow: hidden;
+            }
+
+            .nav-links.active {
+                max-height: 400px;
+                padding: 1rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 4rem 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#hero" class="logo">Lakshay Verma</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="hero-content">
+            <img src="lv.png" alt=""
+                style="width: 200px; height: 200px; border-radius: 80%; object-fit: cover; margin-bottom: 1rem; border: 4px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+            <h1>Hi, I'm <span style="color: #ff6b6b;">Lakshay Verma</span></h1>
+            <p style="font-size: 20px;">Full Stack Developer</p><br>
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#projects" class="cta-button">View My Work</a>
+                <a href="lvcv2.pdf" target="_blank" class="cta-button">Download Resume</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+
+            <div class="about-content" style="max-width: 1000px; text-align: left; margin: 0 auto;">
+                <div style="display: flex; flex-wrap: wrap; gap: 24px; width: 100%;">
+
+                    <!-- Left Column -->
+                    <div style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 24px;">
+
+                        <!-- Quick Facts Card -->
+                        <div
+                            style="background-color: white; border-radius: 10px; padding: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                            <h2 style="font-size: 1.2rem; font-weight: 700; margin: 0 0 24px 0; color: #2c3e50;">Quick
+                                Facts</h2>
+
+                            <!-- Fact Item 1 -->
+                            <div style="display: flex; align-items: flex-start; margin-bottom: 16px;">
+                                <div
+                                    style="width: 36px; height: 36px; border-radius: 8px; background-color: rgba(52, 152, 219, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0;">
+                                    <i class="fas fa-map-marker-alt" style="color: #3498db; font-size: 14px;"></i>
+                                </div>
+                                <div style="display: flex; flex-direction: column;">
+                                    <span
+                                        style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #3498db; letter-spacing: 0.5px; margin-bottom: 4px;">Location</span>
+                                    <span style="font-size: 0.95rem; color: #555; font-weight: 500;">Ludhiana,
+                                        Punjab</span>
+                                </div>
+                            </div>
+
+                            <hr style="border: none; border-top: 1px solid #eee; margin: 16px 0;">
+
+                            <!-- Fact Item 2 -->
+                            <div style="display: flex; align-items: flex-start; margin-bottom: 16px;">
+                                <div
+                                    style="width: 36px; height: 36px; border-radius: 8px; background-color: rgba(52, 152, 219, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0;">
+                                    <i class="fas fa-graduation-cap" style="color: #3498db; font-size: 14px;"></i>
+                                </div>
+                                <div style="display: flex; flex-direction: column;">
+                                    <span
+                                        style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #3498db; letter-spacing: 0.5px; margin-bottom: 4px;">Education</span>
+                                    <span style="font-size: 0.95rem; color: #555; font-weight: 500;">B.Tech in
+                                        CSE</span>
+                                </div>
+                            </div>
+
+                            <hr style="border: none; border-top: 1px solid #eee; margin: 16px 0;">
+
+                            <!-- Fact Item 3 -->
+                            <div style="display: flex; align-items: flex-start;">
+                                <div
+                                    style="width: 36px; height: 36px; border-radius: 8px; background-color: rgba(52, 152, 219, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0;">
+                                    <i class="fas fa-university" style="color: #3498db; font-size: 14px;"></i>
+                                </div>
+                                <div style="display: flex; flex-direction: column;">
+                                    <span
+                                        style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #3498db; letter-spacing: 0.5px; margin-bottom: 4px;">University</span>
+                                    <span style="font-size: 0.95rem; color: #555; font-weight: 500;">Lovely Professional
+                                        University</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Interests Card -->
+                        <div
+                            style="background-color: white; border-radius: 10px; padding: 24px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                            <h2 style="font-size: 1.2rem; font-weight: 700; margin: 0 0 24px 0; color: #2c3e50;">
+                                Interests</h2>
+
+                            <!-- Interest Item 1 -->
+                            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                                <div
+                                    style="width: 36px; height: 36px; border-radius: 8px; background-color: rgba(52, 152, 219, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0;">
+                                    <i class="fas fa-laptop-code" style="color: #3498db; font-size: 14px;"></i>
+                                </div>
+                                <span style="font-size: 0.95rem; font-weight: 600; color: #555;">Web Development</span>
+                            </div>
+
+                            <!-- Interest Item 2 -->
+                            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                                <div
+                                    style="width: 36px; height: 36px; border-radius: 8px; background-color: rgba(52, 152, 219, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0;">
+                                    <i class="fa-solid fa-cube" style="color: #3498db; font-size: 14px;"></i>
+                                </div>
+                                <span style="font-size: 0.95rem; font-weight: 600; color: #555;">Blockchain</span>
+                            </div>
+
+                            <!-- Interest Item 3 -->
+                            <div style="display: flex; align-items: center;">
+                                <div
+                                    style="width: 36px; height: 36px; border-radius: 8px; background-color: rgba(52, 152, 219, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 16px; flex-shrink: 0;">
+                                    <i class="fa-solid fa-lock" style="color: #3498db; font-size: 14px;"></i>
+                                </div>
+                                <span style="font-size: 0.95rem; font-weight: 600; color: #555;">CyberSecurity</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Right Column -->
+                    <div style="flex: 2 1 450px; display: flex; flex-direction: column; gap: 24px;">
+
+                        <!-- My Journey Card -->
+                        <div
+                            style="background-color: white; border-radius: 10px; padding: 32px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                            <h2 style="font-size: 1.3rem; font-weight: 700; margin: 0 0 20px 0; color: #2c3e50;">My
+                                Journey</h2>
+
+                            <p style="font-size: 1rem; color: #555; line-height: 1.7; margin: 0 0 16px 0;">
+                                Hey! I am<span style="color: #3498db; font-weight: 600;">
+                                    Lakshay Verma</span>, a developer who loves creating simple solutions for complex
+                                problems.
+                                <br>
+                                My journey started with a question — “how do websites really work?” That curiosity
+                                pushed me to learn both frontend and backend. Now, I can build complete applications
+                                that are clean, structured, and easy to use.
+                            </p>
+
+
+                        </div>
+
+                        <!-- My Approach Card -->
+                        <div
+                            style="background-color: white; border-radius: 10px; padding: 32px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                            <h2 style="font-size: 1.3rem; font-weight: 700; margin: 0 0 20px 0; color: #2c3e50;">My
+                                Approach</h2>
+
+                            <p style="font-size: 1rem; color: #555; line-height: 1.7; margin: 0;">
+                                I approach every project with a strong problem-solving mindset, carefully analyzing
+                                requirements and breaking them down into manageable parts. I focus on writing optimized
+                                and clean code, improving performance, and delivering practical solutions. I also
+                                believe in continuous learning and regularly explore new technologies to enhance my
+                                development approach.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Bachelor of Technology - CSE</h3>
+                        <h4>Lovely Professional University, Phagwara</h4>
+                        <span class="timeline-date">Aug'23 - Present</span>
+                        <p>CGPA: 7.34</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Intermediate</h3>
+                        <h4>G.M.T Public School, Ludhiana</h4>
+                        <span class="timeline-date">Jul'21 - Jul'23</span>
+                        <p>CGPA: 7.94</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Matriculation</h3>
+                        <h4>G.M.T Public School, Ludhiana</h4>
+                        <span class="timeline-date">Mar'20 - Mar'21</span>
+                        <p>CGPA: 9.41</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>Programming Languages</h4>
+                    <div class="skills">
+                        <span class="skill-tag">C</span><span class="skill-tag">C++</span><span
+                            class="skill-tag">Java</span><span class="skill-tag">Python</span><span
+                            class="skill-tag">JavaScript</span><span class="skill-tag">PHP</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Web Technologies</h4>
+                    <div class="skills">
+                        <span class="skill-tag">HTML</span><span class="skill-tag">CSS</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Frameworks & Libraries</h4>
+                    <div class="skills">
+                        <span class="skill-tag">React.js</span><span class="skill-tag">Node.js</span><span
+                            class="skill-tag">Express.js</span><span class="skill-tag">jQuery</span><span
+                            class="skill-tag">Laravel</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Databases</h4>
+                    <div class="skills">
+                        <span class="skill-tag">MySQL</span><span class="skill-tag">MongoDB</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Tools & Platforms</h4>
+                    <div class="skills">
+                        <span class="skill-tag">VS Code</span><span class="skill-tag">Excel</span><span
+                            class="skill-tag">Antigravity</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>AIVA | AI-Powered Anxiety Relief Bot</h3>
+                        <!-- <span class="project-date">Mar' 25</span> -->
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span
+                                class="tech-tag">JavaScript</span>
+                        </div>
+                        <ul>
+                            <li>Built an intuitive and calming front-end interface with clean layouts, appealing
+                                visuals, and smooth animations.</li>
+                            <li>Created smart, conversational JavaScript logic delivering personalized coping tips and
+                                mood-based recommendations.</li>
+                            <li>Improved overall app performance by writing clean, modular, and cross-browser-friendly
+                                code.</li><br><br><br>
+                            <a href="https://github.com/pranav045/AIVA-Anxiety-Relief-Bot" target="_blank"
+                                style="display:inline-block;background:#667eea;color:white;padding:12px 25px;border-radius:30px;text-decoration:none;font-size:18px;box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);">GitHub</a>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Eco-Power Solutions | E-Commerce</h3>
+                        <!-- <span class="project-date">Mar' 25</span> -->
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span
+                                class="tech-tag">JavaScript</span><span class="tech-tag">PHP</span><span
+                                class="tech-tag">MySQL</span>
+                        </div>
+                        <ul>
+                            <li>Developed an interactive e-commerce website using PHP and MySQL with product listing,
+                                cart and checkout features.</li>
+                            <li>Designed a responsive front-end using HTML, CSS, and JavaScript to improve user
+                                experience.</li>
+                            <li>Implemented secure user authentication, session management, and form validation for
+                                better data accuracy.</li>
+                            <li>Applied full-stack web development principles to build a functional and dynamic
+                                platform.</li><br>
+                            <a href="https://github.com/Kartikeya-09/fullsatck" target="_blank"
+                                style="display:inline-block;background:#667eea;color:white;padding:12px 25px;border-radius:30px;text-decoration:none;font-size:18px;box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);">GitHub</a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications">
+        <div class="container">
+            <h2 class="section-title">Licenses & Certifications</h2>
+            <div class="cert-grid">
+                <a href="Privacy and Security in Online Social Media (2).pdf" style="text-decoration: none;">
+                    <div class="cert-card">
+                        <i class="fas fa-shield-alt cert-icon"></i>
+                        <div class="cert-info">
+                            <h3>Privacy and Security in Online Media</h3>
+                            <p>NPTEL</p>
+                            <!-- <span class="cert-date">Oct' 25</span> -->
+                        </div>
+                    </div>
+                </a>
+                <!-- <div class="cert-card">
+                    <i class="fas fa-code cert-icon"></i>
+                    <div class="cert-info">
+                        <h3>C Programming</h3>
+                        <p>CSE Pathshala</p>
+                        <span class="cert-date">Jul' 25</span>
+                    </div>
+                </div> -->
+                <a href="freecodecamp.pdf" style="text-decoration: none;">
+                    <div class="cert-card">
+                        <i class="fab fa-solid fa-code" style="color:#3498db; font-size: 30px;"></i>
+                        <div class="cert-info" style="padding-bottom: 28px;">
+                            <h3>Responsive Web Design</h3>
+                            <p>FreeCodeCamp</p>
+                            <!-- <span class="cert-date">May' 25</span> -->
+                        </div>
+                    </div>
+                </a>
+                <a href="DSA.pdf" style="text-decoration: none;">
+                    <div class="cert-card">
+                        <i class="fas fa-project-diagram cert-icon"></i>
+                        <div class="cert-info">
+                            <h3>Data Structures and Algorithm</h3>
+                            <p>Lovely Professional University</p>
+                            <!-- <span class="cert-date">Dec' 24</span> -->
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-wrap">
+                <div class="contact-info">
+                    <p>I'm always open to discussing new projects, creative ideas or opportunities to be part of your
+                        visions!</p>
+                    <div class="contact-links">
+                        <a href="mailto:lakshayverma2504@gmail.com" class="contact-link">
+                            <i class="fas fa-envelope"></i> lakshayverma2504@gmail.com
+                        </a>
+                        <a href="tel:+917999067829" class="contact-link">
+                            <i class="fas fa-phone"></i> +91 - 7999067829
+                        </a>
+                        <a href="https://www.linkedin.com/in/lakshayverma25" class="contact-link" target="_blank">
+                            <i class="fab fa-linkedin"></i> LinkedIn Profile
+                        </a>
+                        <a href="https://github.com/LakshayVerma25" class="contact-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub Profile
+                        </a>
+                    </div>
+                </div>
+                <form id="contactForm" class="contact-form">
+                    <h3>Send a Message</h3>
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea rows="5" placeholder="Your Message" required></textarea>
+                    <button type="submit" id="submitBtn">Submit Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Lakshay Verma. All rights reserved. | Made with ❤️</p>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card, .section-title, .skill-category, .timeline-item, .cert-card, .contact-info, .contact-form').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Contact Form Submission Handling
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent actual form submission and API call
+
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.innerText = 'Sending...';
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.7';
+                submitBtn.style.cursor = 'not-allowed';
+
+                // Simulate an API network request before redirecting
+                setTimeout(() => {
+                    window.location.href = 'success.html';
+                }, 1200);
+            });
+        }
+    </script>
+</body>
+
+</html>
